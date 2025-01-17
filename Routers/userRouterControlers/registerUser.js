@@ -23,6 +23,7 @@ async function registerUser(req, res) {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      isAdmin:req.body.isAdmin,
     });
 
     const savedUser = await newUser.save();
