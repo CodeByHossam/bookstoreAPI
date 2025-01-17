@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+    isAdmin:{
+      type: Boolean,
+      default:false,
+    },
   },
   {
     timestamps: true,
@@ -57,6 +61,8 @@ function validateNewUser(user) {
       .messages({
         "string.min": "Password must be at least 6 characters long.",
       }),
+
+      isAdmin:Joi.boolean(),
   });
 
   return schema.validate(user);
@@ -86,6 +92,9 @@ function validateUpdateUser(user) {
       .messages({
         "string.min": "Password must be at least 6 characters long.",
       }),
+
+    isAdmin:Joi.boolean(),
+
   }).min(1); // Ensure at least one field is provided
 
   return schema.validate(user);
