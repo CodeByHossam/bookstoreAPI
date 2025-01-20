@@ -1,62 +1,62 @@
-const express=require("express");
+const express = require("express");
 const bookRouter = require("./Routers/bookRouter");
-const authRouters=require("./Routers/authRouter");
-const userRouters=require("./Routers/userRouter");
-const passwordRouters=require("./Routers/passwordRouters");
-const path = require("path");
-const helmet=require("helmet")
-const cors=require("cors")
-const connectToDB=require("./MiddelWare/dbConfig")
+const authRouters = require("./Routers/authRouter");
+const userRouters = require("./Routers/userRouter");
+const passwordRouters = require("./Routers/passwordRouters");
+const imageUploadRouters = require("./Routers/uploadImageRouter");
 
-const dotenv=require("dotenv");
+const path = require("path");
+const helmet = require("helmet");
+const cors = require("cors");
+const connectToDB = require("./MiddelWare/dbConfig");
+
+const dotenv = require("dotenv");
 const { looger } = require("./MiddelWare/LoggerMiddelWare");
 const notFoundHandler = require("./MiddelWare/notFoundHandler");
 const errorHandler = require("./MiddelWare/errorHandler");
 
-
-
 dotenv.config();
 
-const server=express();
+const server = express();
 
 connectToDB();
 
-//using helmet for protection and adding more header
+// Security Headers
 server.use(helmet());
 
-//using cors middel ware to specify the front end that can use this API
-server.use(cors({
-    origin:"*"
-    // origin:"http://localhost:3000" in case of u want to specify the port Example:using by react
-}))
+// Enable CORS
+server.use(cors({ origin: "*" }));
 
-
-
-// Set the view engine to EJS
+// Set View Engine (EJS)
 server.set("view engine", "ejs");
-// Set the path for the views directory
 server.set("views", path.join(__dirname, "views"));
 
-// Middleware to parse application/x-www-form-urlencoded (typical for HTML forms)
+// Middleware to Parse URL Encoded Data
 server.use(express.urlencoded({ extended: true }));
 
-
+// Middleware to Parse JSON
 server.use(express.json());
+
+// Logger Middleware
 server.use(looger);
-server.use("/books",bookRouter);
-server.use("/authors",authRouters);
-server.use("/user",userRouters);
+
+// Routes
+server.use("/books", bookRouter);
+server.use("/authors", authRouters);
+server.use("/user", userRouters);
 server.use("/password", passwordRouters);
+server.use("/upload", imageUploadRouters);
 
 
-//error not found middleware
+//  Serve Uploaded Images
+server.use("/image", express.static("image"));
+
+// Error Handling Middleware
 server.use(notFoundHandler);
-
-//error handler middleware
 server.use(errorHandler);
 
-const port=process.env.PORT;
-
-server.listen(port,()=>{console.log(`server is runing on port ${port}`);});
-
-
+// Start Server
+const port = process.env.PORT || 5000;
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
