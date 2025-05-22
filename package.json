@@ -4,7 +4,6 @@
   "description": "just for test",
   "main": "index.js",
   "scripts": {
-    // "start": "nodemon app"
     "start": "node app"
   },
   "author": "Hossam",
