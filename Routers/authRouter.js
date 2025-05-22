@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const getAllAuthors = require("./authorRouterControlers/getAllAuthors");
-const getAuthorById = require("./authorRouterControlers/getAuthorById");
-const createAuthor = require("./authorRouterControlers/createAuthor");
-const updateAuthor = require("./authorRouterControlers/updateAuthor");
-const deleteAuthor = require("./authorRouterControlers/deleteAuthor");
+const getAllAuthors = require("../controllers/authorControllers/getAllAuthors");
+const getAuthorById = require("../controllers/authorControllers/getAuthorById");
+const createAuthor = require("../controllers/authorControllers/createAuthor");
+const updateAuthor = require("../controllers/authorControllers/updateAuthor");
+const deleteAuthor = require("../controllers/authorControllers/deleteAuthor");
 
 /**
  * @description Retrieve all authors

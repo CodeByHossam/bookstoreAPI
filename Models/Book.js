@@ -12,7 +12,7 @@ const bookSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
       maxlength: 50,
-      match: /^[a-zA-Z\s]+$/, // Restricts to alphabets and spaces only
+      match: /^[a-zA-Z\s.'-]+$/, // Allow alphabets, spaces, periods, apostrophes, and hyphens
     },
     disc: {
       type: String,
@@ -20,12 +20,13 @@ const bookSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
       maxlength: 50,
-      match: /^[a-zA-Z\s]+$/, // Restricts to alphabets and spaces only
+      match: /^[a-zA-Z\s.'-]+$/, // Allow alphabets, spaces, periods, apostrophes, and hyphens
     },
     auth: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Author", // References the Author model
-      required: true,
+      required: false,
+      default: null, // Will be set to Unknown Author's ID
     },
   },
   {
@@ -44,10 +45,11 @@ function validateNewBook(book) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .required()
       .messages({
-        "string.pattern.base": "Name can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Name can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Name must be at least 3 characters long.",
         "string.max": "Name cannot exceed 50 characters.",
         "any.required": "Name is required.",
@@ -57,10 +59,11 @@ function validateNewBook(book) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .required()
       .messages({
-        "string.pattern.base": "Description can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Description can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Description must be at least 3 characters long.",
         "string.max": "Description cannot exceed 50 characters.",
         "any.required": "Description is required.",
@@ -90,9 +93,10 @@ function validateUpdateBook(book) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .messages({
-        "string.pattern.base": "Name can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Name can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Name must be at least 3 characters long.",
         "string.max": "Name cannot exceed 50 characters.",
       }),
@@ -101,9 +105,10 @@ function validateUpdateBook(book) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .messages({
-        "string.pattern.base": "Description can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Description can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Description must be at least 3 characters long.",
         "string.max": "Description cannot exceed 50 characters.",
       }),

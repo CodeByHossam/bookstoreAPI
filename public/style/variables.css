@@ -1,0 +1,40 @@
+:root {
+  /* Main Colors */
+  --primary-bg: rgb(9, 53, 81);
+  --secondary-bg: #1e3a5f;
+  --accent-color: #00ffcc;
+  --accent-hover: #00e6b8;
+
+  /* Text Colors */
+  --text-primary: white;
+  --text-secondary: whitesmoke;
+  --text-accent: #00ffcc;
+
+  /* Table Colors */
+  --table-header: #2c5282;
+  --table-hover: #2a4365;
+
+  /* Method Colors */
+  --method-get: #48bb78;
+  --method-post: #4299e1;
+  --method-put: #ed8936;
+  --method-delete: #f56565;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 5px;
+  --border-radius-lg: 8px;
+
+  /* Font Sizes */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.5rem;
+}

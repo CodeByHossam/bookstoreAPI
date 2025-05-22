@@ -10,7 +10,7 @@ const authorSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
       maxlength: 50,
-      match: /^[a-zA-Z\s]+$/, // Only alphabets and spaces allowed
+      match: /^[a-zA-Z\s.'-]+$/, // Allow alphabets, spaces, periods, apostrophes, and hyphens
     },
     job: {
       type: String,
@@ -33,10 +33,11 @@ function validateNewAuth(obj) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .required()
       .messages({
-        "string.pattern.base": "Name can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Name can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
       }),
     job: Joi.string()
       .trim()
@@ -59,9 +60,10 @@ function validateUpdateAuth(obj) {
       .trim()
       .min(3)
       .max(50)
-      .pattern(/^[a-zA-Z\s]+$/)
+      .pattern(/^[a-zA-Z\s.'-]+$/)
       .messages({
-        "string.pattern.base": "Name can only contain alphabets and spaces.",
+        "string.pattern.base":
+          "Name can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
       }),
     job: Joi.string()
       .trim()

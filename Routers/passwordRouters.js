@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const renderForgotPasswordForm = require("../Routers/passwordControllers/renderForgotPasswordForm");
-const sendResetLink = require("../Routers/passwordControllers/sendResetLink");
-const renderResetPasswordForm = require("../Routers/passwordControllers/renderResetPasswordForm");
-const handlePasswordReset = require("../Routers/passwordControllers/handlePasswordReset");
+const renderForgotPasswordForm = require("../controllers/passwordControllers/renderForgotPasswordForm");
+const sendResetLink = require("../controllers/passwordControllers/sendResetLink");
+const renderResetPasswordForm = require("../controllers/passwordControllers/renderResetPasswordForm");
+const handlePasswordReset = require("../controllers/passwordControllers/handlePasswordReset");
 
 /**
  * @description Render the view for the "Forgot Password" form

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const getAllBooks = require("./bookRouterControlers/getAllBooks");
-const getBookById = require("./bookRouterControlers/getBookById");
-const createBook = require("./bookRouterControlers/createBook");
-const updateBook = require("./bookRouterControlers/updateBook");
-const deleteBook = require("./bookRouterControlers/deleteBook");
+const getAllBooks = require("../controllers/bookControllers/getAllBooks");
+const getBookById = require("../controllers/bookControllers/getBookById");
+const createBook = require("../controllers/bookControllers/createBook");
+const updateBook = require("../controllers/bookControllers/updateBook");
+const deleteBook = require("../controllers/bookControllers/deleteBook");
 
 /**
  * @description Route to get all books

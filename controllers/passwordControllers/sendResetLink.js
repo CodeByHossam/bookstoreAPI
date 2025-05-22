@@ -1,6 +1,6 @@
 const { User } = require("../../Models/User");
 const jwt = require("jsonwebtoken");
-const sendEmail = require("../../MiddelWare/emailSender")
+const sendEmail = require("../../middleWares/emailSender");
 
 const sendResetLink = async (req, res) => {
   try {

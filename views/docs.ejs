@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Store API Documentation</title>
+    <link rel="stylesheet" href="/style/main.css" />
+  </head>
+  <body>
+    <div class="docs-container">
+      <a href="/" class="back-button">← Back to Home</a>
+      <h1>Book Store API Documentation</h1>
+      <p>Below are all available endpoints:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Books Endpoints -->
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/books</td>
+            <td>Get all books</td>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/books/:id</td>
+            <td>Get a specific book by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/books</td>
+            <td>Create a new book</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td>/books/:id</td>
+            <td>Update a book by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td>/books/:id</td>
+            <td>Delete a book by ID</td>
+          </tr>
+
+          <!-- Authors Endpoints -->
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/authors</td>
+            <td>Get all authors</td>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/authors/:id</td>
+            <td>Get a specific author by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/authors</td>
+            <td>Create a new author</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td>/authors/:id</td>
+            <td>Update an author by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td>/authors/:id</td>
+            <td>Delete an author by ID</td>
+          </tr>
+
+          <!-- User Endpoints -->
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/user</td>
+            <td>Get all users</td>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/user/:id</td>
+            <td>Get a specific user by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/user/register</td>
+            <td>Register a new user</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/user/login</td>
+            <td>Login user</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td>/user/:id</td>
+            <td>Update a user by ID</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td>/user/:id</td>
+            <td>Delete a user by ID</td>
+          </tr>
+
+          <!-- Password Reset Endpoints -->
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/password/forgot</td>
+            <td>Show forgot password form</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/password/reset</td>
+            <td>Send password reset link</td>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/password/reset-password/:id/:token</td>
+            <td>Show reset password form</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/password/password-sucess</td>
+            <td>Handle password reset</td>
+          </tr>
+
+          <!-- Image Upload Endpoint -->
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/upload</td>
+            <td>Upload an image (form-data with 'photo' field)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Database Seeding</h2>
+      <p>
+        The database seeder (`dataSeeder.js`) populates the database with sample
+        data for testing and development purposes. It creates:
+      </p>
+      <ul>
+        <li>6 famous authors with their details</li>
+        <li>6 classic books with their details</li>
+        <li>6 users (1 admin and 5 regular users)</li>
+      </ul>
+
+      <h3>Sample Data</h3>
+      <p>The seeder includes:</p>
+      <ul>
+        <li>6 Famous Authors with detailed information</li>
+        <li>6 Classic Books with complete details</li>
+        <li>Proper relationships between authors and books</li>
+        <li>Pre-configured users for testing</li>
+      </ul>
+
+      <h3>Default Users</h3>
+      <p>The seeder creates the following users for testing:</p>
+
+      <h4>Admin User</h4>
+      <ul>
+        <li>Name: Admin</li>
+        <li>Email: admin@email.com</li>
+        <li>Password: 123456</li>
+        <li>Admin Status: Yes (isAdmin: true)</li>
+      </ul>
+
+      <h4>Regular Users</h4>
+      <ul>
+        <li>John Doe (john@email.com)</li>
+        <li>Jane Smith (jane@email.com)</li>
+        <li>Bob Wilson (bob@email.com)</li>
+        <li>Alice Brown (alice@email.com)</li>
+        <li>Charlie Davis (charlie@email.com)</li>
+      </ul>
+      <p><strong>Note:</strong> All regular users have the password: 123456</p>
+
+      <h3>How to Seed the Database</h3>
+      <p>
+        To seed the database with sample data, run the following command in your
+        terminal:
+      </p>
+      <pre><code>node dataSeeder.js</code></pre>
+
+      <p>The seeder will:</p>
+      <ol>
+        <li>Connect to your MongoDB database</li>
+        <li>Clean existing data (delete all authors, books, and users)</li>
+        <li>Create the default users (1 admin + 5 regular users)</li>
+        <li>Insert the sample authors</li>
+        <li>Create books with references to the authors</li>
+      </ol>
+
+      <p>You should see the following output if successful:</p>
+      <pre><code>🧹 Cleaning existing data...
+👤 Creating users...
+✅ Created 6 users
+👥 Creating authors...
+✅ Created 6 authors
+📚 Creating books...
+✅ Created 6 books
+✨ Database seeding completed successfully!
+
+Default Users Created:
+----------------------
+Admin User:
+Email: admin@email.com
+Password: 123456
+
+Regular Users:
+Email: john@email.com, jane@email.com, bob@email.com
+Email: alice@email.com, charlie@email.com
+Password for all users: 123456</code></pre>
+
+      <p>
+        <strong>Important Notes:</strong>
+      </p>
+      <ul>
+        <li>
+          Make sure your MongoDB connection string is properly set in your .env
+          file before running the seeder.
+        </li>
+        <li>
+          These default passwords should be changed in a production environment.
+        </li>
+        <li>
+          The admin user has full access to all features of the application.
+        </li>
+        <li>Regular users have limited access based on their permissions.</li>
+      </ul>
+    </div>
+  </body>
+</html>

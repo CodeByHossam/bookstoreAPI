@@ -1,6 +1,6 @@
 const { User } = require("../../Models/User");
 const jwt = require("jsonwebtoken");
-const hashPassword = require("../../MiddelWare/passwordHasher");
+const hashPassword = require("../../middleWares/passwordHasher");
 
 const handlePasswordReset = async (req, res) => {
   try {
