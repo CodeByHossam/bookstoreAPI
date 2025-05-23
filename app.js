@@ -2,7 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const environment = process.env.NODE_ENV;
-environment !== "development" ? require("disable-devtool")() : null;
 
 const bookRouter = require("./Routers/bookRouter");
 const authRouters = require("./Routers/authRouter");
