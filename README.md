@@ -8,8 +8,8 @@ A robust RESTful API for an online bookstore built with Node.js, Express, and Mo
 
 ## Live Demo
 
-- API Documentation: [https://book-store-api-zlb1.onrender.com/docs](https://book-store-api-zlb1.onrender.com/docs)
-- API Base URL: [https://book-store-api-zlb1.onrender.com](https://book-store-api-zlb1.onrender.com)
+- API Documentation: [https://book-store-api-6pr7.onrender.com/docs](https://book-store-api-6pr7.onrender.com/docs)
+- API Base URL: [https://book-store-api-6pr7.onrender.com](https://book-store-api-6pr7.onrender.com)
 
 ## Features
 
@@ -148,7 +148,7 @@ node dataSeeder.js
 Visit the API documentation at:
 
 - Local: [http://localhost:5000/docs](http://localhost:5000/docs)
-- Production: [https://book-store-api-zlb1.onrender.com/docs](https://book-store-api-zlb1.onrender.com/docs)
+- Production: [https://book-store-api-6pr7.onrender.com/docs](https://book-store-api-6pr7.onrender.com/docs)
 
 ## Project Structure
 
