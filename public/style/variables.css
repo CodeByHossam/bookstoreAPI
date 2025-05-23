@@ -1,40 +1,47 @@
 :root {
-  /* Main Colors */
-  --primary-bg: rgb(9, 53, 81);
-  --secondary-bg: #1e3a5f;
+  /* Colors */
+  --primary-color: #1976d2;
+  --secondary-color: #2c3e50;
+  --success-color: #2e7d32;
+  --warning-color: #f57c00;
+  --danger-color: #c62828;
+  --light-bg: #f8f9fa;
+  --dark-bg: #1a1a1a;
+  --border-color: #e9ecef;
+  --text-color: #333;
+  --text-light: #666;
   --accent-color: #00ffcc;
   --accent-hover: #00e6b8;
-
-  /* Text Colors */
-  --text-primary: white;
-  --text-secondary: whitesmoke;
-  --text-accent: #00ffcc;
-
-  /* Table Colors */
+  --table-bg: #1e3a5f;
   --table-header: #2c5282;
   --table-hover: #2a4365;
-
-  /* Method Colors */
-  --method-get: #48bb78;
-  --method-post: #4299e1;
-  --method-put: #ed8936;
-  --method-delete: #f56565;
+  --table-border: #2c5282;
 
   /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
 
   /* Border Radius */
   --border-radius-sm: 4px;
-  --border-radius-md: 5px;
+  --border-radius-md: 6px;
   --border-radius-lg: 8px;
+
+  /* Shadows */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
   /* Font Sizes */
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
-  --font-size-lg: 1.1rem;
+  --font-size-lg: 1.2rem;
   --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --font-size-4xl: 8rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.3s;
 }

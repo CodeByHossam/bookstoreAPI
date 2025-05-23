@@ -5,12 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Store API Documentation</title>
     <link rel="stylesheet" href="/style/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
   </head>
   <body>
     <div class="docs-container">
-      <a href="/" class="back-button">← Back to Home</a>
+      <a href="/" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+
       <h1>Book Store API Documentation</h1>
+
+      <div class="repo-info">
+        <h2>Repository Information</h2>
+        <p>
+          <strong>GitHub Repository:</strong>
+          <a
+            href="https://github.com/CodeByHossam/bookstoreAPI"
+            target="_blank"
+            class="repo-link"
+          >
+            <i class="fab fa-github"></i>
+            CodeByHossam/bookstoreAPI
+          </a>
+        </p>
+        <div class="repo-links">
+          <a
+            href="https://github.com/CodeByHossam/bookstoreAPI/stargazers"
+            target="_blank"
+            class="repo-link"
+          >
+            <i class="fas fa-star"></i>
+            Stars
+          </a>
+          <a
+            href="https://github.com/CodeByHossam/bookstoreAPI/forks"
+            target="_blank"
+            class="repo-link"
+          >
+            <i class="fas fa-code-branch"></i>
+            Forks
+          </a>
+          <a
+            href="https://github.com/CodeByHossam/bookstoreAPI/blob/main/LICENSE"
+            target="_blank"
+            class="repo-link"
+          >
+            <i class="fas fa-balance-scale"></i>
+            License
+          </a>
+        </div>
+        <div class="author-info">
+          <strong>Author:</strong>
+          <a
+            href="https://github.com/CodeByHossam"
+            target="_blank"
+            class="repo-link"
+          >
+            <i class="fas fa-user"></i>
+            Hossam
+          </a>
+        </div>
+      </div>
+
+      <div class="repo-info">
+        <h2>Getting Started</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+          <li>Node.js (v14 or higher)</li>
+          <li>npm (v6 or higher)</li>
+          <li>MongoDB (v4.4 or higher)</li>
+        </ul>
+
+        <h3>Installation</h3>
+        <ol>
+          <li>
+            Clone the repository:
+            <pre><code>git clone https://github.com/yourusername/bookStoreAPI.git
+cd bookStoreAPI</code></pre>
+          </li>
+          <li>
+            Install dependencies:
+            <pre><code>npm install</code></pre>
+          </li>
+          <li>
+            Create a `.env` file in the root directory with the following
+            variables:
+            <pre><code>PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development</code></pre>
+          </li>
+        </ol>
+
+        <h3>Starting the Server</h3>
+        <p>For development:</p>
+        <pre><code>npm run dev</code></pre>
+        <p>For production:</p>
+        <pre><code>npm start</code></pre>
+
+        <div class="note">
+          <strong>Note:</strong> Make sure MongoDB is running before starting
+          the server.
+        </div>
+      </div>
+
       <p>Below are all available endpoints:</p>
+
+      <h2>API Base URLs</h2>
+      <p>You can access the API using either of these base URLs:</p>
+      <ul>
+        <li>
+          <strong>Local Development:</strong>
+          <code>http://localhost:5000</code>
+        </li>
+        <li>
+          <strong>Production:</strong>
+          <code>https://book-store-api-zlb1.onrender.com</code>
+        </li>
+      </ul>
+
+      <p><strong>Example:</strong> To get all books, use either:</p>
+      <ul>
+        <li>Local: <code>http://localhost:5000/books</code></li>
+        <li>
+          Production:
+          <code>https://book-store-api-zlb1.onrender.com/books</code>
+        </li>
+      </ul>
 
       <table>
         <thead>

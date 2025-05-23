@@ -1,4 +1,9 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
+const environment = process.env.NODE_ENV;
+environment !== "development" ? require("disable-devtool")() : null;
+
 const bookRouter = require("./Routers/bookRouter");
 const authRouters = require("./Routers/authRouter");
 const userRouters = require("./Routers/userRouter");
@@ -16,12 +21,9 @@ const {
   passwordResetLimiter,
 } = require("./middleWares/rateLimit");
 
-const dotenv = require("dotenv");
 const { logger } = require("./middleWares/Logger");
 const notFoundHandler = require("./middleWares/notFoundHandler");
 const errorHandler = require("./middleWares/errorHandler");
-
-dotenv.config();
 
 const server = express();
 
@@ -50,8 +52,13 @@ server.use("/user/register", authLimiter);
 server.use("/password", passwordResetLimiter);
 server.use("/", apiLimiter);
 
-// Serve Static files
-server.use(express.static("public"));
+// Serve Static files Disable browser caching in development
+server.use(
+  express.static("public", {
+    maxAge: process.env.NODE_ENV === "development" ? 0 : "1d",
+    etag: true,
+  })
+);
 
 // Routes
 server.get("/", (req, res) => res.render("index"));
@@ -67,19 +74,23 @@ server.use(notFoundHandler);
 server.use(errorHandler);
 
 // Start Server function
-const startServer = () => {
-  const port = process.env.PORT || 5000;
-  server.listen(port, () => {
-    console.log(`🚀 Server is running on port ${port}\n you can visit the main page on http://localhost:${port}`);
-  });
+const startServer = async () => {
+  try {
+    await connectToDB();
+    const port = process.env.PORT || 5000;
+    server.listen(port, () => {
+      console.log(
+        `🚀 Server is running on port ${port} in ${environment} environment\n you can visit the main page on http://localhost:${port}`
+      );
+    });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error);
+    // Don't exit the process in development mode
+    if (process.env.NODE_ENV === "production") {
+      process.exit(1);
+    }
+  }
 };
 
-// Connect to DB and then start server
-connectToDB()
-  .then(() => {
-    startServer();
-  })
-  .catch((error) => {
-    console.error("❌ Failed to start server:", error);
-    process.exit(1);
-  });
+// Start the server
+startServer();

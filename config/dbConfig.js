@@ -3,6 +3,11 @@ require("dotenv").config();
 
 const connectToDB = async () => {
   try {
+    // Close any existing connections
+    if (mongoose.connection.readyState !== 0) {
+      await mongoose.connection.close();
+    }
+
     const conn = await mongoose.connect(process.env.MONGODB_URI);
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
@@ -23,7 +28,8 @@ const connectToDB = async () => {
     return conn;
   } catch (error) {
     console.error(`❌ MongoDB connection error: ${error.message}`);
-    process.exit(1);
+    // Don't exit the process, let nodemon handle the restart
+    throw error;
   }
 };
 

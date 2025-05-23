@@ -1,6 +1,15 @@
-# Online Bookstore API
+# Book Store API
 
 A robust RESTful API for an online bookstore built with Node.js, Express, and MongoDB.
+
+[![GitHub](https://img.shields.io/github/license/CodeByHossam/bookstoreAPI)](https://github.com/CodeByHossam/bookstoreAPI/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/CodeByHossam/bookstoreAPI)](https://github.com/CodeByHossam/bookstoreAPI/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/CodeByHossam/bookstoreAPI)](https://github.com/CodeByHossam/bookstoreAPI/forks)
+
+## Live Demo
+
+- API Documentation: [https://book-store-api-zlb1.onrender.com/docs](https://book-store-api-zlb1.onrender.com/docs)
+- API Base URL: [https://book-store-api-zlb1.onrender.com](https://book-store-api-zlb1.onrender.com)
 
 ## Features
 
@@ -15,15 +24,15 @@ A robust RESTful API for an online bookstore built with Node.js, Express, and Mo
 
 ### Book Management
 
-- Basic book CRUD operations
-  - Create new books with name and description
-  - Retrieve books with author details
+- Complete book CRUD operations
+  - Create new books with details
+  - Retrieve books with author information
   - Update book information
   - Delete books from the system
 - Book features
   - Author association
-  - Input validation for book details
-  - Timestamp tracking (created/updated)
+  - Input validation
+  - Timestamp tracking
 
 ### Author Management
 
@@ -39,28 +48,26 @@ A robust RESTful API for an online bookstore built with Node.js, Express, and Mo
 ### Additional Features
 
 - Image upload functionality
-- Email notifications for:
-  - Password reset
+- Email notifications for password reset
 - Secure API endpoints with JWT authentication
-- Input validation using Joi for all requests
-- Comprehensive error handling middleware
-- Detailed logging system for debugging
-- CORS enabled for cross-origin requests
-- Security headers with Helmet protection
+- Input validation using Joi
+- Comprehensive error handling
+- Detailed logging system
+- CORS enabled
+- Security headers with Helmet
 - Database seeding with sample data
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT for authentication
-- EJS for view templates
-- Multer for file uploads
-- Nodemailer for email functionality
-- Joi for validation
-- Helmet for security
-- CORS for cross-origin requests
+- **Backend Framework:** Node.js, Express.js
+- **Database:** MongoDB with Mongoose
+- **Authentication:** JWT
+- **Templating:** EJS
+- **File Upload:** Multer
+- **Email:** Nodemailer
+- **Validation:** Joi
+- **Security:** Helmet, CORS
+- **Development:** Nodemon
 
 ## Prerequisites
 
@@ -73,7 +80,8 @@ A robust RESTful API for an online bookstore built with Node.js, Express, and Mo
 1. Clone the repository
 
 ```bash
-git clone [repository-url]
+git clone https://github.com/CodeByHossam/bookstoreAPI.git
+cd bookstoreAPI
 ```
 
 2. Install dependencies
@@ -82,9 +90,9 @@ git clone [repository-url]
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add the following variables:
+3. Create a `.env` file in the root directory with the following variables:
 
-```
+```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
@@ -96,76 +104,51 @@ FRONTEND_URL=your_frontend_url
 4. Start the server
 
 ```bash
+# Development mode
+npm run dev
+
+# Production mode
 npm start
 ```
 
 ## Database Seeding
 
-The application includes a database seeder that populates your database with sample data. This is useful for testing and development.
+The application includes a database seeder that populates your database with sample data for testing and development.
 
 ### Sample Data
 
-The seeder includes:
-
 - 6 Famous Authors with detailed information
 - 6 Classic Books with complete details
-- Proper relationships between authors and books
+- 6 Users (1 admin + 5 regular users)
+
+### Default Users
+
+- **Admin User**
+
+  - Email: admin@email.com
+  - Password: 123456
+  - Admin Status: Yes (isAdmin: true)
+
+- **Regular Users**
+  - John Doe (john@email.com)
+  - Jane Smith (jane@email.com)
+  - Bob Wilson (bob@email.com)
+  - Alice Brown (alice@email.com)
+  - Charlie Davis (charlie@email.com)
+  - Password for all users: 123456
 
 ### How to Seed
-
-To seed your database with sample data:
 
 ```bash
 node dataSeeder.js
 ```
 
-The seeder will:
+## API Documentation
 
-1. Connect to your MongoDB database
-2. Clean existing data (delete all authors and books)
-3. Insert the sample authors
-4. Create books with references to the authors
+Visit the API documentation at:
 
-Expected output:
-
-```
-✅ Connected to database
-✅ Database cleaned
-✅ Authors seeded
-✅ Books seeded
-✅ Database seeding completed successfully
-```
-
-**Note:** Make sure your MongoDB connection string is properly set in your .env file before running the seeder.
-
-## API Endpoints
-
-### Authentication
-
-- POST `/user/register` - Register a new user
-- POST `/user/login` - Login user
-- POST `/password/reset` - Request password reset
-- POST `/password/reset/:token` - Reset password
-
-### Books
-
-- GET `/books` - Get all books
-- GET `/books/:id` - Get a specific book
-- POST `/books` - Create a new book
-- PUT `/books/:id` - Update a book
-- DELETE `/books/:id` - Delete a book
-
-### Authors
-
-- GET `/authors` - Get all authors
-- GET `/authors/:id` - Get a specific author
-- POST `/authors` - Create a new author
-- PUT `/authors/:id` - Update an author
-- DELETE `/authors/:id` - Delete an author
-
-### Image Upload
-
-- POST `/upload` - Upload an image
+- Local: [http://localhost:5000/docs](http://localhost:5000/docs)
+- Production: [https://book-store-api-zlb1.onrender.com/docs](https://book-store-api-zlb1.onrender.com/docs)
 
 ## Project Structure
 
@@ -175,10 +158,10 @@ Expected output:
 ├── Models/         # Database models
 ├── Routers/        # API routes
 ├── views/          # EJS templates
-├── image/          # Uploaded images
+├── public/         # Static files
+├── config/         # Configuration files
 ├── app.js          # Main application file
-├── dataSeeder.js   # Database seeder
-└── config/         # Configuration files
+└── dataSeeder.js   # Database seeder
 ```
 
 ## Security Features
@@ -191,10 +174,25 @@ Expected output:
 - CORS configuration
 - Rate limiting
 
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 ## License
 
-ISC
+This project is licensed under the ISC License.
 
 ## Author
 
-Hossam
+- **Hossam** - [CodeByHossam](https://github.com/CodeByHossam)
+
+## Acknowledgments
+
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [JWT](https://jwt.io/)
