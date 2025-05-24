@@ -14,15 +14,15 @@ const bookSchema = new mongoose.Schema(
       maxlength: 50,
       match: /^[a-zA-Z\s.'-]+$/, // Allow alphabets, spaces, periods, apostrophes, and hyphens
     },
-    disc: {
+    description: {
       type: String,
       required: true,
       trim: true,
       minlength: 3,
-      maxlength: 50,
+      maxlength: 500,
       match: /^[a-zA-Z\s.'-]+$/, // Allow alphabets, spaces, periods, apostrophes, and hyphens
     },
-    auth: {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Author", // References the Author model
       required: false,
@@ -55,21 +55,21 @@ function validateNewBook(book) {
         "any.required": "Name is required.",
       }),
 
-    disc: Joi.string()
+    description: Joi.string()
       .trim()
       .min(3)
-      .max(50)
+      .max(500)
       .pattern(/^[a-zA-Z\s.'-]+$/)
       .required()
       .messages({
         "string.pattern.base":
           "Description can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Description must be at least 3 characters long.",
-        "string.max": "Description cannot exceed 50 characters.",
+        "string.max": "Description cannot exceed 500 characters.",
         "any.required": "Description is required.",
       }),
 
-    auth: Joi.string()
+    author: Joi.string()
       .pattern(/^[0-9a-fA-F]{24}$/) // Validates MongoDB ObjectId format
       .required()
       .messages({
@@ -101,19 +101,19 @@ function validateUpdateBook(book) {
         "string.max": "Name cannot exceed 50 characters.",
       }),
 
-    disc: Joi.string()
+    description: Joi.string()
       .trim()
       .min(3)
-      .max(50)
+      .max(500)
       .pattern(/^[a-zA-Z\s.'-]+$/)
       .messages({
         "string.pattern.base":
           "Description can only contain alphabets, spaces, periods, apostrophes, and hyphens.",
         "string.min": "Description must be at least 3 characters long.",
-        "string.max": "Description cannot exceed 50 characters.",
+        "string.max": "Description cannot exceed 500 characters.",
       }),
 
-    auth: Joi.string()
+    author: Joi.string()
       .pattern(/^[0-9a-fA-F]{24}$/)
       .messages({
         "string.pattern.base": "Invalid author ID format.",

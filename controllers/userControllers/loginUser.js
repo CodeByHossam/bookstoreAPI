@@ -1,5 +1,5 @@
 const { validateLoginData } = require("../../Models/User");
-const validateRegisteration = require("../../middleWares/validateRegisteration");
+const validateCredentials = require("../../middleWares/validateCredentials");
 const { User } = require("../../Models/User");
 
 async function loginUser(req, res) {
@@ -11,8 +11,8 @@ async function loginUser(req, res) {
       .json({ success: false, message: error.details[0].message });
 
   try {
-    //validate if the user is exist in the data base before loging in then validate the password
-    await validateRegisteration(req, res, User);
+    //validate user Credentials from the database
+    await validateCredentials(req, res, User);
   } catch (err) {
     console.error("Error during login:", err);
     res.status(500).json({ success: false, message: "Internal server error" });

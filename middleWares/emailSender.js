@@ -12,6 +12,7 @@ function createMessageObject(email, htmlWithLink) {
   return message;
 }
 
+// Current implementation using Ethereal (trial) email service
 function sendEmail(email, htmlWithLink) {
   // Generate SMTP service account from ethereal.email
   nodemailer.createTestAccount((err, account) => {
@@ -49,5 +50,40 @@ function sendEmail(email, htmlWithLink) {
     );
   });
 }
+
+/* 
+// Future implementation for real email service
+// To use this, uncomment and replace the current sendEmail function
+// Also add these environment variables to .env:
+// EMAIL_SERVICE=gmail
+// EMAIL_USER=your-email@gmail.com
+// EMAIL_PASS=your-app-specific-password
+
+async function sendRealEmail(email, htmlWithLink) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE || 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: `Book Store API <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Change the password of your account ✔",
+      text: "Please click on the link to change your password!",
+      html: htmlWithLink,
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
+}
+*/
 
 module.exports = sendEmail;

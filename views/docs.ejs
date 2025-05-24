@@ -87,20 +87,51 @@
         <ol>
           <li>
             Clone the repository:
-            <pre><code>git clone https://github.com/yourusername/bookStoreAPI.git
-cd bookStoreAPI</code></pre>
+            <pre><code>git clone https://github.com/CodeByHossam/bookstoreAPI.git
+cd bookstoreAPI</code></pre>
           </li>
           <li>
             Install dependencies:
             <pre><code>npm install</code></pre>
           </li>
           <li>
-            Create a `.env` file in the root directory with the following
-            variables:
-            <pre><code>PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-NODE_ENV=development</code></pre>
+            Configure environment variables:
+            <p>
+              Create a `.env` file in the root directory with the following
+              variables:
+            </p>
+            <pre><code># Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# Database Configuration
+MONGODB_URI=mongodb://localhost:27017/bookstore
+
+# Security
+JWT_SECRET=your_very_secure_jwt_secret_key
+ADMIN_PASSWORD=your_secure_admin_password
+
+# Email Configuration
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_app_password
+FRONTEND_URL=http://localhost:3000</code></pre>
+
+            <h4>Example with Sample Values</h4>
+            <pre><code># Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# Database Configuration
+MONGODB_URI=mongodb://localhost:27017/bookstore
+
+# Security
+JWT_SECRET=mysecretkey123456789
+ADMIN_PASSWORD=Admin@123456
+
+# Email Configuration
+EMAIL_USER=yourname@gmail.com
+EMAIL_PASS=abcd efgh ijkl mnop
+FRONTEND_URL=http://localhost:3000</code></pre>
           </li>
         </ol>
 
@@ -111,12 +142,17 @@ NODE_ENV=development</code></pre>
         <pre><code>npm start</code></pre>
 
         <div class="note">
-          <strong>Note:</strong> Make sure MongoDB is running before starting
-          the server.
+          <strong>Important Notes:</strong>
+          <ul>
+            <li>Make sure MongoDB is running before starting the server</li>
+            <li>Keep your JWT_SECRET and ADMIN_PASSWORD secure</li>
+            <li>
+              For Gmail, use an App Password instead of your regular password
+            </li>
+            <li>Replace all values with your actual configuration</li>
+          </ul>
         </div>
       </div>
-
-      <p>Below are all available endpoints:</p>
 
       <h2>API Base URLs</h2>
       <p>You can access the API using either of these base URLs:</p>
@@ -140,6 +176,7 @@ NODE_ENV=development</code></pre>
         </li>
       </ul>
 
+      <h2>Available Endpoints</h2>
       <table>
         <thead>
           <tr>
@@ -293,7 +330,7 @@ NODE_ENV=development</code></pre>
       <ul>
         <li>Name: Admin</li>
         <li>Email: admin@email.com</li>
-        <li>Password: 123456</li>
+        <li>Password: Set in .env file (ADMIN_PASSWORD)</li>
         <li>Admin Status: Yes (isAdmin: true)</li>
       </ul>
 
@@ -306,6 +343,12 @@ NODE_ENV=development</code></pre>
         <li>Charlie Davis (charlie@email.com)</li>
       </ul>
       <p><strong>Note:</strong> All regular users have the password: 123456</p>
+
+      <div class="note">
+        <strong>Important:</strong> Make sure to set the ADMIN_PASSWORD in your
+        .env file before running the seeder. This password will be used for the
+        admin user (admin@email.com).
+      </div>
 
       <h3>How to Seed the Database</h3>
       <p>
@@ -337,29 +380,30 @@ Default Users Created:
 ----------------------
 Admin User:
 Email: admin@email.com
-Password: 123456
+Password: Set in .env file (ADMIN_PASSWORD)
 
 Regular Users:
 Email: john@email.com, jane@email.com, bob@email.com
 Email: alice@email.com, charlie@email.com
 Password for all users: 123456</code></pre>
 
-      <p>
+      <div class="note">
         <strong>Important Notes:</strong>
-      </p>
-      <ul>
-        <li>
-          Make sure your MongoDB connection string is properly set in your .env
-          file before running the seeder.
-        </li>
-        <li>
-          These default passwords should be changed in a production environment.
-        </li>
-        <li>
-          The admin user has full access to all features of the application.
-        </li>
-        <li>Regular users have limited access based on their permissions.</li>
-      </ul>
+        <ul>
+          <li>
+            Make sure your MongoDB connection string is properly set in your
+            .env file before running the seeder.
+          </li>
+          <li>
+            These default passwords should be changed in a production
+            environment.
+          </li>
+          <li>
+            The admin user has full access to all features of the application.
+          </li>
+          <li>Regular users have limited access based on their permissions.</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>

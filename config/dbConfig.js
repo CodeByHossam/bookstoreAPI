@@ -25,6 +25,13 @@ const connectToDB = async () => {
       console.log("🔄 MongoDB reconnected");
     });
 
+    // Handle process termination
+    process.on("SIGINT", async () => {
+      await mongoose.connection.close();
+      console.log("MongoDB connection closed through app termination");
+      process.exit(0);
+    });
+
     return conn;
   } catch (error) {
     console.error(`❌ MongoDB connection error: ${error.message}`);

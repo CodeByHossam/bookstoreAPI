@@ -27,7 +27,18 @@ const errorHandler = require("./middleWares/errorHandler");
 const server = express();
 
 // Security Headers
-server.use(helmet());
+server.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:"],
+      },
+    },
+  })
+);
 
 // Enable CORS
 server.use(cors(corsOptions));
@@ -37,10 +48,10 @@ server.set("view engine", "ejs");
 server.set("views", path.join(__dirname, "views"));
 
 // Middleware to Parse URL Encoded Data
-server.use(express.urlencoded({ extended: true }));
+server.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
 // Middleware to Parse JSON
-server.use(express.json());
+server.use(express.json({ limit: "10kb" }));
 
 // Logger Middleware
 server.use(logger);
@@ -90,6 +101,15 @@ const startServer = async () => {
     }
   }
 };
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err) => {
+  console.error("❌ Unhandled Promise Rejection:", err);
+  // Don't exit the process in development mode
+  if (process.env.NODE_ENV === "production") {
+    process.exit(1);
+  }
+});
 
 // Start the server
 startServer();

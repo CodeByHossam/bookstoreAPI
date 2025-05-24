@@ -4,210 +4,215 @@ const { Book } = require("./Models/Book");
 const { User } = require("./Models/User");
 const connectToDB = require("./config/dbConfig");
 require("dotenv").config();
-
-// Sample users data
-const users = [
-  {
-    name: "Admin",
-    email: "admin@email.com",
-    password: "123456",
-    isAdmin: true,
-  },
-  {
-    name: "John Doe",
-    email: "john@email.com",
-    password: "123456",
-    isAdmin: false,
-  },
-  {
-    name: "Jane Smith",
-    email: "jane@email.com",
-    password: "123456",
-    isAdmin: false,
-  },
-  {
-    name: "Bob Wilson",
-    email: "bob@email.com",
-    password: "123456",
-    isAdmin: false,
-  },
-  {
-    name: "Alice Brown",
-    email: "alice@email.com",
-    password: "123456",
-    isAdmin: false,
-  },
-  {
-    name: "Charlie Davis",
-    email: "charlie@email.com",
-    password: "123456",
-    isAdmin: false,
-  },
-];
+const hashPassword = require("./middleWares/passwordHasher");
 
 // Sample authors data
 const authors = [
   {
     name: "J.K. Rowling",
     job: "Novelist",
-    bio: "British author best known for the Harry Potter series",
-    nationality: "British",
-    birthYear: 1965,
   },
   {
     name: "George R.R. Martin",
     job: "Novelist",
-    bio: "American novelist and short story writer, best known for A Song of Ice and Fire series",
-    nationality: "American",
-    birthYear: 1948,
   },
   {
     name: "Stephen King",
     job: "Author",
-    bio: "American author of horror, supernatural fiction, suspense, and fantasy novels",
-    nationality: "American",
-    birthYear: 1947,
   },
   {
     name: "Agatha Christie",
     job: "Novelist",
-    bio: "English writer known for her detective novels",
-    nationality: "British",
-    birthYear: 1890,
   },
   {
     name: "Ernest Hemingway",
     job: "Novelist",
-    bio: "American novelist, short story writer, and journalist",
-    nationality: "American",
-    birthYear: 1899,
   },
   {
     name: "Jane Austen",
     job: "Novelist",
-    bio: "English novelist known for romantic fiction",
-    nationality: "British",
-    birthYear: 1775,
   },
 ];
 
-// Sample books data with explicit author assignments
+// Sample books data
 const books = [
   {
     name: "Harry Potter and the Philosopher's Stone",
-    disc: "The first book in the Harry Potter series",
+    description: "The first book in the Harry Potter series",
     authorName: "J.K. Rowling",
-    price: 19.99,
-    isbn: "978-0747532743",
-    publicationYear: 1997,
-    genre: "Fantasy",
   },
   {
     name: "A Game of Thrones",
-    disc: "The first book in A Song of Ice and Fire series",
+    description: "The first book in A Song of Ice and Fire series",
     authorName: "George R.R. Martin",
-    price: 24.99,
-    isbn: "978-0553103540",
-    publicationYear: 1996,
-    genre: "Fantasy",
   },
   {
     name: "The Shining",
-    disc: "A horror novel by Stephen King",
+    description: "A horror novel by Stephen King",
     authorName: "Stephen King",
-    price: 17.99,
-    isbn: "978-0385121675",
-    publicationYear: 1977,
-    genre: "Horror",
   },
   {
     name: "Murder on the Orient Express",
-    disc: "A detective novel by Agatha Christie",
+    description: "A detective novel by Agatha Christie",
     authorName: "Agatha Christie",
-    price: 14.99,
-    isbn: "978-0062073495",
-    publicationYear: 1934,
-    genre: "Mystery",
   },
   {
     name: "The Old Man and the Sea",
-    disc: "A novel by Ernest Hemingway",
+    description: "A novel by Ernest Hemingway",
     authorName: "Ernest Hemingway",
-    price: 12.99,
-    isbn: "978-0684801223",
-    publicationYear: 1952,
-    genre: "Fiction",
   },
   {
     name: "Pride and Prejudice",
-    disc: "A romantic novel by Jane Austen",
+    description: "A romantic novel by Jane Austen",
     authorName: "Jane Austen",
-    price: 9.99,
-    isbn: "978-0141439518",
-    publicationYear: 1813,
-    genre: "Romance",
   },
 ];
 
-// Function to seed the database
+// Main seed function
 async function seedDatabase() {
   try {
-    // Connect to database
-    await connectToDB();
+    // Validate environment variables
+    if (!process.env.ADMIN_PASSWORD) {
+      throw new Error(
+        "ADMIN_PASSWORD is not set in .env file. Please set it before running the seeder."
+      );
+    }
 
-    // Clean existing data
-    console.log("🧹 Cleaning existing data...");
+    if (!process.env.MONGODB_URI) {
+      throw new Error(
+        "MONGODB_URI is not set in .env file. Please set it before running the seeder."
+      );
+    }
+
+    // Connect to DB
+    console.log("🔌 Connecting to database...");
+    await connectToDB();
+    console.log("✅ Connected to database successfully");
+
+    // Hash passwords
+    console.log("🔒 Hashing passwords...");
+    const adminPassword = await hashPassword(process.env.ADMIN_PASSWORD);
+    const usersPassword = await hashPassword("123456");
+    console.log("✅ Passwords hashed successfully");
+
+    // Create users
+    const users = [
+      {
+        name: "Admin",
+        email: "admin@email.com",
+        password: adminPassword,
+        isAdmin: true,
+      },
+      {
+        name: "John Doe",
+        email: "john@email.com",
+        password: usersPassword,
+        isAdmin: false,
+      },
+      {
+        name: "Jane Smith",
+        email: "jane@email.com",
+        password: usersPassword,
+        isAdmin: false,
+      },
+      {
+        name: "Bob Wilson",
+        email: "bob@email.com",
+        password: usersPassword,
+        isAdmin: false,
+      },
+      {
+        name: "Alice Brown",
+        email: "alice@email.com",
+        password: usersPassword,
+        isAdmin: false,
+      },
+      {
+        name: "Charlie Davis",
+        email: "charlie@email.com",
+        password: usersPassword,
+        isAdmin: false,
+      },
+    ];
+
+    // Clear collections
+    console.log("\n🧹 Cleaning existing data...");
     await Author.deleteMany({});
     await Book.deleteMany({});
     await User.deleteMany({});
+    console.log("✅ Collections cleaned successfully");
 
-    // Create users
-    console.log("👤 Creating users...");
+    // Insert users
+    console.log("\n👤 Creating users...");
     const createdUsers = await User.create(users);
     console.log(`✅ Created ${createdUsers.length} users`);
 
-    // Create authors
-    console.log("👥 Creating authors...");
+    // Insert authors
+    console.log("\n👥 Creating authors...");
     const createdAuthors = await Author.create(authors);
     console.log(`✅ Created ${createdAuthors.length} authors`);
 
-    // Create a map of author names to their IDs for easy lookup
+    // Map author names to IDs
     const authorMap = createdAuthors.reduce((map, author) => {
       map[author.name] = author._id;
       return map;
     }, {});
 
-    // Update books with author references
+    // Assign author ID to each book
     const updatedBooks = books.map((book) => {
-      const { authorName, ...bookData } = book; // Remove authorName from book data
+      const { authorName, ...bookData } = book;
+      const authorId = authorMap[authorName];
+      if (!authorId) {
+        throw new Error(`Author not found: ${authorName}`);
+      }
       return {
         ...bookData,
-        auth: authorMap[authorName], // Use the author map to get the correct ID
+        author: authorId,
       };
     });
 
-    // Create books
-    console.log("📚 Creating books...");
+    // Insert books
+    console.log("\n📚 Creating books...");
     const createdBooks = await Book.create(updatedBooks);
     console.log(`✅ Created ${createdBooks.length} books`);
 
-    console.log("✨ Database seeding completed successfully!");
-    console.log("\nDefault Users Created:");
-    console.log("----------------------");
-    console.log("Admin User:");
-    console.log("Email: admin@email.com");
-    console.log("Password: 123456");
-    console.log("\nRegular Users:");
-    console.log("Email: john@email.com, jane@email.com, bob@email.com");
-    console.log("Email: alice@email.com, charlie@email.com");
-    console.log("Password for all users: 123456");
+    // Summary
+    console.log(`
+✨ Database seeding completed successfully!
+
+Default Users Created:
+----------------------
+Admin User:
+Email: admin@email.com
+Password: Set in .env file (ADMIN_PASSWORD)
+
+Regular Users:
+Email: john@email.com, jane@email.com, bob@email.com
+Email: alice@email.com, charlie@email.com
+Password for all users: 123456
+
+Important Notes:
+----------------
+1. Make sure to keep your ADMIN_PASSWORD secure
+2. Regular users' passwords should be changed in production
+3. The admin user has full access to all features
+4. Regular users have limited access based on permissions
+`);
 
     process.exit(0);
-  } catch (error) {
-    console.error("❌ Error seeding database:", error);
+  } catch (err) {
+    console.error("\n❌ Error seeding database:");
+    console.error(err.message);
+    if (err.stack) {
+      console.error("\nStack trace:");
+      console.error(err.stack);
+    }
     process.exit(1);
   }
 }
 
 // Run the seeder
 seedDatabase();
+
+// Export seed function for testing
+module.exports = seedDatabase;

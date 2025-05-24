@@ -1,7 +1,7 @@
 {
   "name": "bookstore",
   "version": "1.0.0",
-  "description": "just for test",
+  "description": "A robust RESTful API for an online bookstore built with Node.js, Express, and MongoDB",
   "main": "index.js",
   "scripts": {
     "start": "node app",
@@ -28,11 +28,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "My online bookstore"
+    "url": "https://github.com/CodeByHossam/bookstoreAPI"
   },
   "keywords": [
     "bookstore",
-    "online",
-    "books"
+    "api",
+    "rest",
+    "nodejs",
+    "express",
+    "mongodb"
   ]
 }

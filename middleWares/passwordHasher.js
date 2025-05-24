@@ -1,16 +1,11 @@
-
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-async function hashPassword(plainPassword){
-    const salt=await bcrypt.genSalt(saltRounds);
-        const hashedPassword=bcrypt.hash(plainPassword,salt)
+async function hashPassword(plainPassword) {
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hashedPassword = await bcrypt.hash(plainPassword, salt);
 
-        return hashedPassword;
+  return hashedPassword;
 }
 
-
- 
-
- module.exports=hashPassword;
-
+module.exports = hashPassword;
