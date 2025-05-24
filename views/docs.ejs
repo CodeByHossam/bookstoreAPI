@@ -404,6 +404,221 @@ Password for all users: 123456</code></pre>
           <li>Regular users have limited access based on their permissions.</li>
         </ul>
       </div>
+
+      <!-- Add new Postman Testing Section -->
+      <section id="postman-testing" class="testing-section">
+        <h2>Postman Testing Guide</h2>
+
+        <div class="test-setup">
+          <h3>Postman Setup</h3>
+          <ol>
+            <li>Create a new Collection: "Bookstore API Tests"</li>
+            <li>
+              Set up Environment Variables:
+              <pre><code>baseUrl: http://localhost:5000
+regularToken: (leave empty)
+adminToken: (leave empty)
+bookId: (leave empty)
+userId: (leave empty)</code></pre>
+            </li>
+          </ol>
+        </div>
+
+        <div class="test-cases">
+          <h3>Test Cases</h3>
+
+          <div class="test-case">
+            <h4>1. User Registration Tests</h4>
+
+            <div class="endpoint">
+              <h5>1.1 Regular User Registration</h5>
+              <ul>
+                <li><strong>Method:</strong> POST</li>
+                <li><strong>URL:</strong> {{ baseUrl }}/user/register</li>
+                <li>
+                  <strong>Headers:</strong> Content-Type: application/json
+                </li>
+                <li>
+                  <strong>Body:</strong>
+                  <pre><code>{
+    "name": "Test User",
+    "email": "test@example.com",
+    "password": "your_secure_password_here"
+  }</code></pre>
+                </li>
+                <li>
+                  <strong>Expected Response (201):</strong>
+                  <pre><code>{
+    "success": true,
+    "data": {
+      "name": "Test User",
+      "email": "test@example.com",
+      "isAdmin": false,
+      "_id": "user_id_here"
+    }
+  }</code></pre>
+                </li>
+              </ul>
+            </div>
+
+            <div class="endpoint">
+              <h5>1.2 Admin User Registration</h5>
+              <ul>
+                <li><strong>Method:</strong> POST</li>
+                <li><strong>URL:</strong> {{ baseUrl }}/user/register</li>
+                <li>
+                  <strong>Headers:</strong>
+                  <ul>
+                    <li>Content-Type: application/json</li>
+                    <li>Authorization: Bearer {{ adminToken }}</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Body:</strong>
+                  <pre><code>{
+    "name": "New Admin",
+    "email": "newadmin@example.com",
+    "password": "your_secure_admin_password_here",
+    "isAdmin": true
+  }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="test-case">
+            <h4>2. Authentication Tests</h4>
+
+            <div class="endpoint">
+              <h5>2.1 Regular User Login</h5>
+              <ul>
+                <li><strong>Method:</strong> POST</li>
+                <li><strong>URL:</strong> {{ baseUrl }}/user/login</li>
+                <li>
+                  <strong>Headers:</strong> Content-Type: application/json
+                </li>
+                <li>
+                  <strong>Body:</strong>
+                  <pre><code>{
+    "email": "test@example.com",
+    "password": "your_secure_password_here"
+  }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="test-case">
+            <h4>3. Book Management Tests</h4>
+
+            <div class="endpoint">
+              <h5>3.1 Add New Book (Admin)</h5>
+              <ul>
+                <li><strong>Method:</strong> POST</li>
+                <li><strong>URL:</strong> {{ baseUrl }}/book/add</li>
+                <li>
+                  <strong>Headers:</strong>
+                  <ul>
+                    <li>Content-Type: application/json</li>
+                    <li>Authorization: Bearer {{ adminToken }}</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Body:</strong>
+                  <pre><code>{
+    "title": "Test Book",
+    "author": "Test Author",
+    "description": "Test Description",
+    "price": 29.99,
+    "category": "Fiction",
+    "stock": 100
+  }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-instructions">
+          <h3>Test Execution Instructions</h3>
+          <ol>
+            <li>Set up your environment variables in Postman</li>
+            <li>
+              Run tests in sequence as they may depend on previous test results
+            </li>
+            <li>Save test data IDs (user_id, book_id) for subsequent tests</li>
+            <li>Clean up test data after completion</li>
+            <li>Document any failures or unexpected behavior</li>
+          </ol>
+        </div>
+
+        <div class="best-practices">
+          <h3>Best Practices</h3>
+          <ul>
+            <li>Always use environment variables for sensitive data</li>
+            <li>Clean up test data after each test suite</li>
+            <li>Test both success and failure scenarios</li>
+            <li>Verify response status codes and data structures</li>
+            <li>Test rate limiting and security measures</li>
+            <li>Document any API changes that affect tests</li>
+          </ul>
+        </div>
+      </section>
     </div>
+
+    <style>
+      .testing-section {
+        margin-top: 2rem;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .test-case {
+        margin: 1.5rem 0;
+        padding: 1rem;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .endpoint {
+        margin: 1rem 0;
+        padding: 1rem;
+        border-left: 4px solid #007bff;
+      }
+
+      pre {
+        background: #f1f1f1;
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      h3,
+      h4,
+      h5 {
+        margin-top: 1.5rem;
+        color: #2c3e50;
+      }
+
+      ul,
+      ol {
+        margin-left: 1.5rem;
+      }
+
+      .test-instructions,
+      .best-practices {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    </style>
   </body>
 </html>

@@ -183,6 +183,8 @@ Visit the API documentation at:
 - Local: [http://localhost:5000/docs](http://localhost:5000/docs)
 - Production: [https://book-store-api-6pr7.onrender.com/docs](https://book-store-api-6pr7.onrender.com/docs)
 
+For detailed API testing instructions and examples, see [API Testing Guide](./API_TESTING_GUIDE.md)
+
 ## 📁 Project Structure
 
 ```
